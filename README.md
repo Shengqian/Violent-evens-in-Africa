@@ -1,5 +1,6 @@
 # Violent-evens-in-Africa
 This repository is for exploring the ACLED data that realted to all kinds to voilent data in Africa.
+
 1. Data
 My data were from a project called Armed Conflict Location and Event Data Project (ACLED).
 ACLED reported information of political violence events in over 60 developing countries an Africa and Asia from 1997 to the present. ACLED focuses on tracking a range of violent and non-violent actions by political agents, including governments, rebels, militias, communal groups, political parties, rioters, protesters and civilians.Data contain specific information on the date, location, group names, interaction type, event type, reported fatalities and contextual notes.
