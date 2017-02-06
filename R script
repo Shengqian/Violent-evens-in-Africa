@@ -1,0 +1,32 @@
+library(rgdal)#read ORG
+library(maptools)
+library(spatstat)
+library(maps)
+
+data <- readOGR("./Shapefiles", "ACLED_GIS_2015")
+poly <- readOGR("./Africa2","Export_Output_3")
+co.border <- readOGR("./country","Country_Export_Output")
+data.ex <- data
+data.ex@data <- data.ex@data[c("EVENT_DATE","YEAR","EVENT_TYPE","LATITUDE","LONGITUDE")]
+data2015 <- data.ex[data.ex$YEAR == 2015,]
+plot(data2015, main = "Events happened in 2015\nAfrica")
+plot(co.border, add = T)
+
+#for different kinds of event
+pointdata <- data2015
+l <- c("Battles","Battles","Battles","Non-violent activity",
+       "Non-violent activity","Non-violent activity","Remote violence","Riots/Protest",
+       "Violence against civilians")
+levels(pointdata$EVENT_TYPE) <- l
+color = c("blue4","green","red","black","orange")
+plot(pointdata, col = color, main = "Different events happened in 2015\nAfrica")
+leg = c("Battles","Non-violent activity","Remote violence","Riots/Protest",
+        "Violence against civilians")
+legend("bottomleft", legend = leg, fill = color, cex=0.5)
+
+y = data2015$LATITUDE
+x = data2015$LONGITUDE
+w <- as.owin(poly)
+pp <- ppp(x, y, window = w)# plot size changed by using country border.???
+dens <- density(pp, bw.scott)
+plot(dens, main = "Intensity estimate\nwith optimal bandwidth Scott")
